@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jonmircha — Sistema de Diseño</title>
+<meta name="description" content="Referencia visual del sistema de diseño jonmircha: colores, tipografía, espaciado, formas y componentes. Tokens fieles a DESIGN.md.">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<style>
+/* ============ TOKENS (fieles a DESIGN.md) ============ */
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"PT Sans";src:url("assets/fonts/pt-sans-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Raleway";src:url("assets/fonts/raleway-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway";src:url("assets/fonts/raleway-bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Raleway Black";src:url("assets/fonts/raleway-black.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto Mono";src:url("assets/fonts/roboto-mono-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+:root{
+  --color-primary:#E7562E; --color-primary-hover:#D94D1F; --color-primary-active:#C63C0A;
+  --color-secondary:#E7762E; --color-tertiary:#0088CC; --color-tertiary-light:#73CFFA;
+  --color-surface:#FCFCFC; --color-surface-alt:#F7F7F7; --color-on-surface:#202225;
+  --color-neutral:#808080; --color-coal-dark:#2B3A42; --color-coal-medium:#20252C; --color-coal-deep:#202B38;
+  --color-muted-bg:#EEEEEE; --color-disabled:#CCCCCC; --color-white:#FFFFFF; --color-error:#B00020;
+  --rounded-none:0px; --rounded-sm:8px; --rounded-md:16px; --rounded-pill:50px; --rounded-full:9999px;
+  --sp-xs:4px; --sp-sm:8px; --sp-md:12px; --sp-lg:16px; --sp-xl:24px; --sp-2xl:32px; --sp-3xl:40px; --sp-4xl:48px; --sp-5xl:92px; --sp-6xl:136px;
+  --shadow-subtle:0 2px 4px rgba(0,0,0,.08); --shadow-medium:0 4px 12px rgba(0,0,0,.12); --shadow-high:0 8px 24px rgba(0,0,0,.16);
+  --max-w:1440px; --font-body:"PT Sans",system-ui,sans-serif; --font-display:"Raleway",system-ui,sans-serif;
+  --font-black:"Raleway Black","Raleway",system-ui,sans-serif; --font-mono:"Roboto Mono",ui-monospace,monospace;
+  --bg:var(--color-surface); --fg:var(--color-on-surface); --card-bg:var(--color-white);
+}
+html[data-theme="dark"]{ --bg:var(--color-coal-deep); --fg:var(--color-surface); --card-bg:var(--color-coal-medium); }
+/* ============ BASE ============ */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+body{margin:0;font-family:var(--font-body);font-size:20px;line-height:30px;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
+.skip{position:absolute;left:-9999px;top:0;background:var(--color-on-surface);color:#fff;padding:12px 16px;z-index:100}
+.skip:focus{left:8px;top:8px}
+a{color:var(--color-tertiary)}
+a:hover{color:var(--color-primary);text-decoration:underline}
+html[data-theme="dark"] a{color:var(--color-tertiary-light)}
+:focus-visible{outline:3px solid var(--color-tertiary);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 48px}
+@media(max-width:1023px){.wrap{padding:0 48px} body{font-size:18px}}
+@media(max-width:599px){.wrap{padding:0 12px}}
+/* Navbar 64px */
+.navbar{position:sticky;top:0;z-index:50;height:64px;display:flex;align-items:center;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--color-muted-bg)}
+html[data-theme="dark"] .navbar{border-color:#3a4750}
+.navbar-inner{width:100%;max-width:var(--max-w);margin:0 auto;padding:0 48px;display:flex;align-items:center;gap:24px}
+@media(max-width:599px){.navbar-inner{padding:0 12px}}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--font-black);font-size:20px;color:var(--fg);text-decoration:none}
+.brand img{width:32px;height:32px}
+.nav-links{display:flex;gap:8px;margin-left:auto;list-style:none;padding:0;margin-top:0;margin-bottom:0}
+.nav-links a{font-size:20px;color:var(--fg);text-decoration:none;padding:8px 12px;min-height:44px;display:inline-flex;align-items:center}
+.nav-links a:hover{color:var(--color-primary);text-decoration:underline;text-decoration-thickness:2px}
+.nav-links a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:3px}
+.theme-btn,.menu-btn{margin-left:8px;min-width:44px;min-height:44px;border:1px solid var(--color-muted-bg);background:var(--color-muted-bg);border-radius:var(--rounded-full);cursor:pointer;font-size:16px}
+.menu-btn{display:none}
+@media(max-width:760px){.menu-btn{display:inline-flex;align-items:center;justify-content:center}.nav-links{display:none}.nav-links.open{display:flex;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;padding:12px;border-bottom:1px solid var(--color-muted-bg)}}
+/* Hero 48H/92V */
+.hero{padding:92px 48px;text-align:left;background:var(--color-white);color:var(--color-on-surface)}
+html[data-theme="dark"] .hero{background:var(--color-coal-deep);color:var(--color-surface)}
+.hero-inner{max-width:var(--max-w);margin:0 auto}
+@media(max-width:599px){.hero{padding:48px 12px}}
+.kicker{font-family:var(--font-mono);font-size:16px;color:var(--color-neutral);margin:0 0 12px}
+html[data-theme="dark"] .kicker{color:var(--color-tertiary-light)}
+.display{font-family:var(--font-black);font-size:40px;line-height:48px;margin:0 0 16px;letter-spacing:-.01em}
+.lead{max-width:62ch;margin:0 0 24px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+/* Buttons (tokens) */
+.btn{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:24px;padding:12px 24px;border-radius:var(--rounded-pill);border:0;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn-primary{background:var(--color-primary);color:#fff}
+.btn-primary:hover{background:var(--color-primary-hover);color:#fff}
+.btn-primary:active{background:var(--color-primary-active);transform:scale(.98)}
+.btn-primary:disabled,.btn-disabled{background:var(--color-disabled);color:var(--color-neutral);cursor:not-allowed;transform:none}
+.btn-icon{width:44px;height:44px;min-width:44px;padding:0;border-radius:var(--rounded-full);background:var(--color-muted-bg);color:var(--color-primary);border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:18px}
+.btn-icon:hover{background:var(--color-primary);color:#fff}
+.btn-ghost{background:transparent;border:0;color:var(--color-tertiary);font-family:var(--font-body);font-size:20px;cursor:pointer;padding:12px 8px;min-height:44px}
+.btn-ghost:hover{color:var(--color-primary);text-decoration:underline}
+/* Sections */
+main section{padding:48px 0;border-top:1px solid var(--color-muted-bg);scroll-margin-top:80px}
+main section:first-of-type{border-top:0}
+h2.sec{font-family:var(--font-black);font-size:40px;line-height:48px;margin:0 0 8px}
+.sec-desc{color:var(--color-neutral);font-size:18px;max-width:70ch;margin:0 0 24px}
+html[data-theme="dark"] .sec-desc{color:#B9C2C7}
+h3{font-family:var(--font-body);font-weight:700;font-size:16px;line-height:24px;text-transform:uppercase;letter-spacing:.06em;margin:32px 0 12px}
+/* Colors grid */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;list-style:none;padding:0;margin:0}
+.swatch{border:1px solid var(--color-muted-bg);border-radius:var(--rounded-none);overflow:hidden;background:var(--card-bg)}
+.swatch-color{height:88px}
+.swatch-body{padding:12px 16px}
+.swatch-body strong{display:block;font-size:16px}
+.swatch-body code{font-family:var(--font-mono);font-size:14px}
+.swatch-body p{font-size:15px;line-height:22px;margin:6px 0 0;color:var(--color-neutral)}
+html[data-theme="dark"] .swatch-body p{color:#B9C2C7}
+.badge{display:inline-block;font-size:12px;font-family:var(--font-mono);padding:2px 8px;border-radius:var(--rounded-full);background:var(--color-muted-bg);color:var(--color-on-surface);margin-left:6px}
+html[data-theme="dark"] .badge{color:#20252C}
+/* Type scale */
+.type-card{border:1px solid var(--color-muted-bg);background:var(--card-bg);padding:16px 20px;margin-bottom:12px}
+.type-meta{font-family:var(--font-mono);font-size:13px;color:var(--color-neutral);margin-top:8px}
+/* Spacing */
+.scale{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:12px 0}
+.bar{background:linear-gradient(90deg,var(--color-primary),var(--color-secondary));min-width:24px}
+.bar-label{font-family:var(--font-mono);font-size:12px;text-align:center;margin-top:4px}
+/* Elevation */
+.elev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.elev{padding:24px;background:var(--card-bg);border:1px solid var(--color-muted-bg)}
+.elev code{font-family:var(--font-mono);font-size:13px}
+.scrim-demo{background:rgba(0,0,0,.5);color:#fff;padding:24px}
+/* Shapes */
+.shape-grid{display:flex;gap:16px;flex-wrap:wrap}
+.shape{width:120px;height:80px;background:var(--color-muted-bg);color:var(--color-on-surface);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;border:1px solid var(--color-muted-bg)}
+.circle{width:88px;height:88px;border-radius:var(--rounded-full)}
+/* Components */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{border:1px solid var(--color-muted-bg);background:var(--color-white);color:var(--color-on-surface);padding:12px 16px}
+html[data-theme="dark"] .card{background:var(--color-coal-medium);color:var(--color-surface);border-color:#3a4750}
+.card:hover{box-shadow:var(--shadow-subtle)}
+.card-alt{background:var(--color-surface-alt)}
+.card-dark{background:var(--color-coal-medium);color:var(--color-surface)}
+.course{border:1px solid var(--color-muted-bg);background:#fff;color:#202225;padding:16px}
+.course:hover{border-color:var(--color-primary);box-shadow:var(--shadow-subtle)}
+.course h4{font-family:var(--font-display);font-weight:700;font-size:19px;margin:8px 0}
+.edu{border:1px solid var(--color-muted-bg);border-left:4px solid var(--color-primary);background:#fff;color:#202225;padding:12px 16px}
+.edu-meta{font-family:var(--font-mono);font-size:14px;color:var(--color-neutral)}
+.field label{display:block;font-weight:700;font-size:16px;margin-bottom:6px}
+.field input{width:100%;font-family:var(--font-body);font-size:20px;padding:12px 16px;border:2px solid var(--color-muted-bg);border-radius:0;background:#fff;color:#202225;min-height:44px}
+.field input:focus{border-color:var(--color-primary);box-shadow:0 0 0 4px rgba(231,86,46,.15);outline:none}
+.field input::placeholder{color:var(--color-neutral)}
+.field-dark input{background:var(--color-coal-dark);color:var(--color-surface);border-color:#3a4750}
+.chips{display:flex;gap:8px;flex-wrap:wrap;list-style:none;padding:0}
+.chip{background:var(--color-muted-bg);color:var(--color-on-surface);font-size:13px;padding:8px 14px;border-radius:var(--rounded-full)}
+.avatar{width:160px;height:160px;max-width:200px;aspect-ratio:1;border-radius:50%;object-fit:cover;border:4px solid var(--color-muted-bg)}
+.socials{display:flex;gap:8px}
+.socials a{width:44px;height:44px;border-radius:50%;background:var(--color-muted-bg);color:var(--color-on-surface);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:700}
+.socials a:hover{background:var(--color-primary);color:#fff}
+.contact{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#202225;border:1px solid var(--color-muted-bg);padding:12px 16px;text-decoration:none;min-height:44px}
+.contact:hover{border-color:var(--color-primary);color:var(--color-primary)}
+.contact .ic{color:var(--color-primary)}
+.skill{display:flex;gap:8px;align-items:center;background:#fff;color:#202225;border:1px solid var(--color-muted-bg);padding:12px 16px}
+.skill .dot{color:var(--color-primary);font-weight:900}
+/* Do / Don't */
+.do-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.do-grid{grid-template-columns:1fr}}
+.do,.dont{border:1px solid var(--color-muted-bg);padding:16px 20px;background:var(--card-bg)}
+.do h3{color:#1a7f37}.dont h3{color:var(--color-error)}
+.do ul,.dont ul{padding-left:20px;margin:0;font-size:17px;line-height:27px}
+footer{border-top:1px solid var(--color-muted-bg);padding:24px 0 48px;font-size:15px;color:var(--color-neutral)}
+.copy-btn{font-family:var(--font-mono);font-size:12px;border:1px solid var(--color-muted-bg);background:transparent;color:inherit;border-radius:var(--rounded-full);padding:4px 10px;cursor:pointer;min-height:32px}
+.copy-btn:hover{border-color:var(--color-primary);color:var(--color-primary)}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#top" aria-label="jonmircha inicio">
+      <img src="assets/img/isotipo.svg" alt="" width="32" height="32"> jonmircha
+    </a>
+    <nav aria-label="Secciones del sistema">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#colores">Colores</a></li>
+        <li><a href="#tipografia">Tipografía</a></li>
+        <li><a href="#espaciado">Espaciado</a></li>
+        <li><a href="#componentes">Componentes</a></li>
+      </ul>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-pressed="false" aria-label="Cambiar a tema oscuro">◐ Tema</button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-inner">
+    <p class="kicker">DESIGN.md · v alpha · referencia visual</p>
+    <h1 class="display">Moderna, enérgica y docente.</h1>
+    <p class="lead">Acento audaz sin abrumar: naranjas vibrantes sobre carbones profundos, alto contraste y componentes sin ornamentación. Esta página aplica fielmente los tokens de <code>DESIGN.md</code>.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#componentes">Ver componentes</a>
+      <button class="btn-icon" type="button" aria-label="Acción secundaria">★</button>
+      <button class="btn-ghost" type="button">Soy un botón fantasma</button>
+    </div>
+  </div>
+</div>
+
+<main id="contenido"><div class="wrap">
+
+<section aria-labelledby="t-overview">
+  <h2 class="sec" id="t-overview">Overview</h2>
+  <p class="sec-desc">Puente entre experiencia técnica y calidez cercana. Para creadores y desarrolladores. Motivo de marca: búho con degradado naranja.</p>
+  <p>Claro: <code>#FCFCFC</code> + texto <code>#202225</code> · Oscuro: <code>#202B38</code> / <code>#20252C</code> / <code>#2B3A42</code> + texto <code>#FCFCFC</code>. Máximo 1440px centrado, mobile-first.</p>
+</section>
+
+<section aria-labelledby="t-colores" id="colores">
+  <h2 class="sec" id="t-colores">Colores</h2>
+  <p class="sec-desc">Toca el botón HEX para copiar. Las insignias indican el rol. Nota: el naranja con blanco no llega a 4.5:1 — úsalo en grande/negrita o en fondo oscurecido.</p>
+  <ul class="swatches" id="swatches"></ul>
+</section>
+
+<section aria-labelledby="t-tipo" id="tipografia">
+  <h2 class="sec" id="t-tipo">Tipografía</h2>
+  <p class="sec-desc">PT Sans = cuerpo/navegación · Raleway = títulos/botones/énfasis · Raleway Black = titulares top · Roboto Mono = código.</p>
+  <div class="type-card"><div style="font-family:var(--font-black);font-size:40px;line-height:48px;font-weight:900">Display — Raleway Black 40/48</div><div class="type-meta">typography.display · 900 · embalaje de titulares</div></div>
+  <div class="type-card"><div style="font-family:'PT Sans';font-size:40px;line-height:48px;font-weight:700">H1 — PT Sans Bold 40/48</div><div class="type-meta">typography.h1 · 700</div></div>
+  <div class="type-card"><div style="font-family:var(--font-black);font-size:40px;line-height:48px">H2 — Raleway Black 40</div><div class="type-meta">typography.h2 · 900</div></div>
+  <div class="type-card"><div style="font-family:'PT Sans';font-size:16px;font-weight:700">H3 / Label — PT Sans Bold 16/24</div><div class="type-meta">typography.h3 · typography.label</div></div>
+  <div class="type-card"><div style="font-family:'PT Sans';font-size:20px;line-height:30px">Body LG — PT Sans 20/30. Base en escritorio, nunca bajo 16px.</div><div class="type-meta">typography.body-lg</div></div>
+  <div class="type-card"><div style="font-family:'Raleway';font-size:20px">Lista — Raleway 20</div><div class="type-meta">typography.body-list</div></div>
+  <div class="type-card"><div style="font-family:'Raleway';font-size:16px">Pequeño — Raleway 16</div><div class="type-meta">typography.body-sm</div></div>
+  <div class="type-card"><div style="font-family:'Raleway';font-size:19px;font-weight:700">Botón — Raleway 19.2</div><div class="type-meta">typography.button-label</div></div>
+  <div class="type-card"><div style="font-family:'Roboto Mono';font-size:16px">Código — Roboto Mono 16/24 · const x = 1;</div><div class="type-meta">typography.code</div></div>
+  <div class="type-card"><div><span class="chip">Chip — Raleway 13px</span></div><div class="type-meta">typography.chip</div></div>
+</section>
+
+<section aria-labelledby="t-esp" id="espaciado">
+  <h2 class="sec" id="t-esp">Layout, espaciado y formas</h2>
+  <p class="sec-desc">Unidad 8px · Botones 12–16px · Tarjetas 12–24px · Secciones 48–92px · Grid 12 / 8 / 1 col.</p>
+  <h3>Escala</h3>
+  <div class="scale" aria-hidden="true">
+    <div><div class="bar" style="height:8px;width:40px"></div><div class="bar-label">xs 4</div></div>
+    <div><div class="bar" style="height:12px;width:40px"></div><div class="bar-label">sm 8</div></div>
+    <div><div class="bar" style="height:16px;width:40px"></div><div class="bar-label">md 12</div></div>
+    <div><div class="bar" style="height:20px;width:40px"></div><div class="bar-label">lg 16</div></div>
+    <div><div class="bar" style="height:28px;width:40px"></div><div class="bar-label">xl 24</div></div>
+    <div><div class="bar" style="height:36px;width:40px"></div><div class="bar-label">2xl 32</div></div>
+    <div><div class="bar" style="height:44px;width:40px"></div><div class="bar-label">4xl 48</div></div>
+    <div><div class="bar" style="height:64px;width:40px"></div><div class="bar-label">5xl 92</div></div>
+    <div><div class="bar" style="height:84px;width:40px"></div><div class="bar-label">6xl 136</div></div>
+  </div>
+  <h3>Elevación</h3>
+  <div class="elev-grid">
+    <div class="elev">Plano — sin sombra<br><code>flat</code></div>
+    <div class="elev" style="box-shadow:var(--shadow-subtle)">Sutil — hover tarjeta<br><code>0 2px 4px / .08</code></div>
+    <div class="elev" style="box-shadow:var(--shadow-medium)">Media — modal<br><code>0 4px 12px / .12</code></div>
+    <div class="elev" style="box-shadow:var(--shadow-high)">Alta — flotante máx.<br><code>0 8px 24px / .16</code></div>
+    <div class="elev scrim-demo">Velo modal — negro 50%</div>
+  </div>
+  <h3>Radios</h3>
+  <div class="shape-grid">
+    <div class="shape" style="border-radius:0">none · 0</div>
+    <div class="shape" style="border-radius:8px">sm · 8</div>
+    <div class="shape" style="border-radius:16px">md · 16</div>
+    <div class="shape" style="border-radius:50px;padding:0 20px;width:auto">pill · 50</div>
+    <div class="shape circle">full</div>
+  </div>
+</section>
+
+<section aria-labelledby="t-comp" id="componentes">
+  <h2 class="sec" id="t-comp">Componentes</h2>
+  <p class="sec-desc">Muestras interactivas con tokens reales. Foco visible con teclado, táctil mínimo 44px.</p>
+  <h3>Botones</h3>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+    <button class="btn btn-primary" type="button">Primario</button>
+    <button class="btn btn-primary" type="button" style="background:var(--color-primary-hover)">Hover #D94D1F</button>
+    <button class="btn btn-primary" type="button" style="background:var(--color-primary-active)">Active #C63C0A</button>
+    <button class="btn btn-disabled" type="button" disabled>Deshabilitado</button>
+    <button class="btn-icon" type="button" aria-label="Favorito">♥</button>
+    <button class="btn-ghost" type="button"> fantasma / enlace</button>
+  </div>
+  <h3>Tarjetas</h3>
+  <div class="comp-grid">
+    <article class="card"><h4 style="margin:0 0 8px;font-family:var(--font-black)">Card</h4><p style="margin:0">Fondo surface, recta, hover con sombra sutil.</p></article>
+    <article class="card card-alt"><h4 style="margin:0 0 8px">Card Alt</h4><p style="margin:0">Fondo <code>#F7F7F7</code> para tema claro.</p></article>
+    <article class="card card-dark"><h4 style="margin:0 0 8px">Card Dark</h4><p style="margin:0">Fondo <code>#20252C</code> + texto <code>#FCFCFC</code>.</p></article>
+    <article class="course"><div aria-hidden="true">◉</div><h4>Curso Raleway 700 19px</h4><a href="#componentes">Ver →</a></article>
+    <article class="edu"><div style="display:flex;justify-content:space-between;gap:8px"><strong>Diseño UI</strong><span class="edu-meta">2024 · mono</span></div><p style="margin:8px 0 0">Acento lateral naranja 4px.</p></article>
+    <div class="skill"><span class="dot" aria-hidden="true">◆</span><span>Habilidad con icono naranja</span></div>
+  </div>
+  <h3>Formulario</h3>
+  <div class="comp-grid">
+    <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name"></div>
+    <div class="field field-dark"><label for="nombre2">Nombre (oscuro)</label><input id="nombre2" name="nombre2" type="text" placeholder="Tu nombre"></div>
+  </div>
+  <h3>Chips, avatar, sociales, contacto</h3>
+  <ul class="chips"><li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">JS</li></ul>
+  <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:12px">
+    <img class="avatar" src="assets/img/jonmircha.jpg" alt="Foto de perfil de jonmircha" width="160" height="160" loading="lazy">
+    <div class="socials" aria-label="Redes sociales"><a href="#componentes" aria-label="X">X</a><a href="#componentes" aria-label="GitHub">G</a><a href="#componentes" aria-label="YouTube">▶</a></div>
+    <a class="contact" href="#componentes"><span class="ic" aria-hidden="true">✉</span> hola@jonmircha.com</a>
+  </div>
+  <h3>Navegación y enlaces</h3>
+  <p><a href="#componentes">Enlace en texto azul</a> · <a href="#componentes" style="font-family:var(--font-black);color:var(--color-primary)">Título-enlace naranja</a></p>
+</section>
+
+<section aria-labelledby="t-do">
+  <h2 class="sec" id="t-do">Do's and Don'ts</h2>
+  <div class="do-grid">
+    <div class="do"><h3>Sí</h3><ul><li>Naranja en CTA primarios</li><li>Cuerpo 20px, mínimo 16px</li><li>Secciones 48–92px</li><li>PT Sans cuerpo, Raleway Black solo top</li><li>Iconos circulares sociales</li><li>Tarjetas a 0px</li><li>Hover con color/subrayado</li></ul></div>
+    <div class="dont"><h3>No</h3><ul><li>Naranja + azul en el mismo interactivo</li><li>Sombras más allá de 0 8px 24px</li><li>Texto más claro que #808080</li><li>Serif en jerarquía</li><li>Botones &lt;32px / &lt;40px alto</li><li>Ocultar navegación crítica en móvil</li><li>Fondos que maten legibilidad</li></ul></div>
+  </div>
+</section>
+
+<section aria-labelledby="t-responsivo" id="responsivo">
+  <h2 class="sec" id="t-responsivo">Comportamiento responsivo</h2>
+  <p class="sec-desc">Extensión propia del sistema (punto 9 del Word, no forma parte del spec Google DESIGN.md). Mobile-first, 4 tamaños.</p>
+  <div style="overflow-x:auto">
+  <table style="width:100%;border-collapse:collapse;font-size:17px;line-height:26px;background:var(--card-bg)">
+    <caption style="text-align:left;padding:8px 0;color:var(--color-neutral)">Breakpoints y retícula fieles al documento</caption>
+    <thead><tr>
+      <th scope="col" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Tamaño</th>
+      <th scope="col" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Rango</th>
+      <th scope="col" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Columnas</th>
+      <th scope="col" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Márgenes</th>
+      <th scope="col" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Secciones</th>
+    </tr></thead>
+    <tbody>
+      <tr><th scope="row" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Móvil</th><td style="padding:12px;border:1px solid var(--color-muted-bg)">320–599px</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">1</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">12px</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">24px</td></tr>
+      <tr><th scope="row" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Tableta</th><td style="padding:12px;border:1px solid var(--color-muted-bg)">600–1023px</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">2–3</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">48px</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">48px</td></tr>
+      <tr><th scope="row" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Escritorio</th><td style="padding:12px;border:1px solid var(--color-muted-bg)">1024–1439px</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">3 o más</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">48–92px</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">92px</td></tr>
+      <tr><th scope="row" style="text-align:left;padding:12px;border:1px solid var(--color-muted-bg)">Amplio</th><td style="padding:12px;border:1px solid var(--color-muted-bg)">1440px+</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">3 o más, max 1440px centrado</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">auto</td><td style="padding:12px;border:1px solid var(--color-muted-bg)">92–136px</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>Reglas táctiles y de adaptación</h3>
+  <ul style="font-size:17px;line-height:27px;max-width:70ch">
+    <li>Interactivos (botones, iconos, enlaces): mínimo 44×44px. Campos: mínimo 40px de alto.</li>
+    <li>En móvil la navegación se apila o pasa a hamburguesa; las tarjetas pasan a 1 columna.</li>
+    <li>Titulares pueden reducirse en móvil, nunca bajo 24px; cuerpo en 18–20px.</li>
+  </ul>
+</section>
+
+</div></main>
+
+<footer><div class="wrap">jonmircha DS · <code>DESIGN.md</code> alpha · 17 colores · 12 tipografías · 11 espaciados · 23 componentes · <span id="year"></span></div></footer>
+
+<script>
+(function(){
+  var data=[
+    ["primary","#E7562E","CTA, acentos, marca"],
+    ["primary-hover","#D94D1F","Hover primario"],
+    ["primary-active","#C63C0A","Pressed primario"],
+    ["secondary","#E7762E","Énfasis puntual"],
+    ["tertiary","#0088CC","Enlaces secundarios"],
+    ["tertiary-light","#73CFFA","Hover claro / links dark"],
+    ["surface","#FCFCFC","Fondo base claro"],
+    ["surface-alt","#F7F7F7","Fondo alterno claro"],
+    ["on-surface","#202225","Texto principal"],
+    ["neutral","#808080","Terciario / disabled"],
+    ["coal-dark","#2B3A42","Fondo oscuro / input-dark"],
+    ["coal-medium","#20252C","Capas / card-dark"],
+    ["coal-deep","#202B38","Overlay / hero-dark"],
+    ["muted-bg","#EEEEEE","Secundarios, chips"],
+    ["disabled","#CCCCCC","Fondo deshabilitado"],
+    ["white","#FFFFFF","Contraste máximo"],
+    ["error","#B00020","Errores [REVIEW]"]
+  ];
+  function lum(h){h=h.replace("#","");var r=parseInt(h.substr(0,2),16)/255,g=parseInt(h.substr(2,2),16)/255,b=parseInt(h.substr(4,2),16)/255;function f(c){return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4)}r=f(r);g=f(g);b=f(b);return 0.2126*r+0.7152*g+0.0722*b;}
+  function cr(a,b){var x=lum(a),y=lum(b);var hi=Math.max(x,y),lo=Math.min(x,y);return (hi+0.05)/(lo+0.05);}
+  var ul=document.getElementById("swatches");
+  data.forEach(function(d){
+    var name=d[0],hex=d[1],rol=d[2];
+    var dark=(lum(hex.replace("#","#"))<0.35);
+    var fg=dark?"#FFFFFF":"#202225";
+    var ratio=cr(hex,fg);
+    var li=document.createElement("li");li.className="swatch";
+    li.innerHTML='<div class="swatch-color" style="background:'+hex+';color:'+fg+'"></div>'+
+      '<div class="swatch-body"><strong>'+name+'</strong> '+
+      '<button class="copy-btn" type="button" data-hex="'+hex+'" aria-label="Copiar '+hex+'">'+hex+'</button>'+
+      '<p>'+rol+' · AA '+ratio.toFixed(2)+':1 '+(ratio>=4.5?"✓":"⚠")+'</p></div>';
+    ul.appendChild(li);
+  });
+  ul.addEventListener("click",function(e){
+    var b=e.target.closest(".copy-btn");if(!b)return;
+    var h=b.getAttribute("data-hex");
+    if(navigator.clipboard){navigator.clipboard.writeText(h).then(function(){b.textContent="¡copiado!";setTimeout(function(){b.textContent=h;},1200);});}
+  });
+  var btn=document.getElementById("themeBtn"),html=document.documentElement;
+  function setT(t){html.setAttribute("data-theme",t);btn.setAttribute("aria-pressed",t==="dark"?"true":"false");btn.setAttribute("aria-label",t==="dark"?"Cambiar a tema claro":"Cambiar a tema oscuro");try{localStorage.setItem("jm-theme",t);}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem("jm-theme");}catch(e){}
+  if(saved==="dark"||saved==="light"){setT(saved);}
+  btn.addEventListener("click",function(){setT(html.getAttribute("data-theme")==="dark"?"light":"dark");});
+  var menu=document.getElementById("menuBtn"),nav=document.getElementById("navLinks");
+  menu.addEventListener("click",function(){var open=nav.classList.toggle("open");menu.setAttribute("aria-expanded",open?"true":"false");});
+  document.getElementById("year").textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
